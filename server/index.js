@@ -13,7 +13,7 @@ app.use(express.json({limit: "30mb", extended: true}))
 app.use(express.urlencoded({limit: "30mb", extended: true}))
 app.use(cors(
     {
-        origin: ["https://stack-overflow-wine-three.vercel.app"],
+        origin: [""],
         methods: ["POST","GET","PATCH","DELETE","PUT"],
         credentials: true
     }
