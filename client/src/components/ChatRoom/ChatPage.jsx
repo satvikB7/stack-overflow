@@ -18,7 +18,7 @@ const ChatPage = () => {
   const User = useSelector((state) => state.currentUserReducer);
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:5001');
+    socketRef.current = io('http://localhost:5000');
     const socket = socketRef.current;
 
     socket.connect();
