@@ -17,7 +17,7 @@ app.use(express.json({ limit: '30mb', extended: true }));
 app.use(express.urlencoded({ limit: '30mb', extended: true }));
 app.use(cors(
   {
-    origin: ["https://deploy-mern-1whq.vercel.app"],
+    origin: ["https://stack-overflow-client-seven.vercel.app"],
     methods: ["POST","GET","PATCH","DELETE","PUT"],
     credentails: true
   }
