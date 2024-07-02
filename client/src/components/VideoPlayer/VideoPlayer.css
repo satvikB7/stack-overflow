@@ -1,0 +1,33 @@
+.video-player-container {
+  max-width: 600px;
+  margin: 80px auto 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.video-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.video-item {
+  margin-bottom: 10px;
+}
+
+.video-link {
+  display: block;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  text-decoration: none;
+  color: #333;
+  transition: all 0.3s ease;
+}
+
+.video-link:hover {
+  background-color: #f0f0f0;
+  border-color: #999;
+}
