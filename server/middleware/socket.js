@@ -5,7 +5,9 @@ const socketMiddleware = (server) => {
   const io = new Server(server, {
     cors: {
       origin: ["https://stack-overflow-client-seven.vercel.app"],
-      methods: ["POST","GET","PUT","DELETE"]
+      methods: ["GET", "POST", "PUT", "DELETE"],
+      credentials: true,
+      allowedHeaders: ["Content-Type", "Authorization"],
     }
   });
 
