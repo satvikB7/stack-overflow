@@ -4,8 +4,9 @@ import ChatRoom from '../models/chatRoom.js';
 const socketMiddleware = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:3000", 
-      methods: ["GET", "POST"]
+      origin: ["https://deploy-mern-1whq.vercel.app"],
+      methods: ["POST","GET","PATCH","DELETE","PUT"],
+      credentails: true
     }
   });
 
