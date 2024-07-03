@@ -7,7 +7,6 @@ const socketMiddleware = (server) => {
       origin: ["https://stack-overflow-client-seven.vercel.app"],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
-      allowedHeaders: ["Content-Type", "Authorization"],
     },
     transports: ['websocket'],
   });
