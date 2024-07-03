@@ -7,8 +7,8 @@ const socketMiddleware = (server) => {
       origin: ["https://stack-overflow-client-seven.vercel.app"],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
+      transports: ['websocket']
     },
-    transports: ['websocket'],
   });
 
   io.on('connection', (socket) => {
