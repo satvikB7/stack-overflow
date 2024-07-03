@@ -18,7 +18,9 @@ const ChatPage = () => {
   const User = useSelector((state) => state.currentUserReducer);
 
   useEffect(() => {
-    socketRef.current = io('http://localhost:5000');
+    socketRef.current = io('http://localhost:5000', {
+      transports: ['websocket'], 
+    });
     const socket = socketRef.current;
 
     socket.connect();
@@ -52,20 +54,20 @@ const ChatPage = () => {
   const sendMessage = () => {
     if (message.trim() !== '' && User && User.result && User.result.name) {
       const socket = socketRef.current;
-      socket.emit('sendMessage', { pin, userId: User.result.name, message }); 
+      socket.emit('sendMessage', { pin, userId: User.result.name, message });
       setMessage(''); // Clear the input field after sending
     }
   };
 
   const handleKeyDown = (e) => {
-    if(e.key === 'Enter'){
+    if (e.key === 'Enter') {
       e.preventDefault();
       sendMessage();
     }
-  } 
+  };
 
   const handleShowPin = () => {
-    setShowPin((prevShowPin) => !prevShowPin); 
+    setShowPin((prevShowPin) => !prevShowPin);
     setTimeout(() => {
       setShowPin(false);
     }, 5000);
@@ -75,7 +77,7 @@ const ChatPage = () => {
     const socket = socketRef.current;
     socket.emit('leaveRoom', { pin });
     socket.disconnect();
-    navigate('/ChatRoom'); 
+    navigate('/ChatRoom');
   };
 
   return (
@@ -85,7 +87,7 @@ const ChatPage = () => {
         <div className="chat-page-container">
           <div className="notifications-container">
             {notifications.map((msg, index) => (
-              <Notification key={index} userId={msg.userId} message={msg.message} />  
+              <Notification key={index} userId={msg.userId} message={msg.message} />
             ))}
           </div>
           <div className="chat-messages">
