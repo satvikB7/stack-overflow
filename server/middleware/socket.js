@@ -8,7 +8,8 @@ const socketMiddleware = (server) => {
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
       allowedHeaders: ["Content-Type", "Authorization"],
-    }
+    },
+    transports: ['websocket'],
   });
 
   io.on('connection', (socket) => {
