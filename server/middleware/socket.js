@@ -4,7 +4,7 @@ import ChatRoom from '../models/chatRoom.js';
 const socketMiddleware = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: ["https://stack-overflow-wine-three.vercel.app/"],
+      origin: ["https://stack-overflow-client-seven.vercel.app],
       methods: ["GET", "POST", "PUT", "DELETE"],
       credentials: true,
       allowedHeaders: ["Content-Type", "Authorization"],
