@@ -14,7 +14,7 @@ const LeftSidebar = ({ roomId }) => {
     const fetchRoomPIN = async () => {
       try {
         if (!roomId) return;
-        const response = await axios.get(`http://localhost:5000/getRoomPin/${roomId}`);
+        const response = await axios.get(`https://stack-overflow-wine-three.vercel.app/getRoomPin/${roomId}`);
         setPin(response.data.pin);
       } catch (error) {
         console.error('Error fetching PIN:', error);
