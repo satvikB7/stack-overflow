@@ -19,8 +19,7 @@ app.use(cors(
   {
     origin: ["https://stack-overflow-client-seven.vercel.app"],
     methods: ["POST","GET","PATCH","DELETE","PUT"],
-    credentials: true,
-    transports: ['websocket']
+    credentials: true
   }
 ));
 
