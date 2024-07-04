@@ -28,20 +28,17 @@ const ChatPage = () => {
 
     socket.on('connect', () => {
       console.log('Connected to WebSocket server');
-      socket.emit('joinRoom', { pin });
+      socket.emit('joinRoom', { pin, userId: User?.result?.name });
     });
 
     socket.on('message', (msg) => {
-      console.log('Received message:', msg);
       if (msg.type === 'user') {
-        const newMessage = { userId: msg.userId, message: msg.message };
-        setMessages((prevMessages) => [...prevMessages, newMessage]);
+        setMessages((prevMessages) => [...prevMessages, { userId: msg.userId, message: msg.message }]);
       } else if (msg.type === 'system') {
-        console.log('System Message:', msg);
         setNotifications((prevNotifications) => [...prevNotifications, msg]);
         setTimeout(() => {
           setNotifications((prevNotifications) => prevNotifications.filter((n) => n !== msg));
-        }, 5000); // Remove notification after 5 seconds
+        }, 5000);
       }
     });
 
@@ -54,17 +51,15 @@ const ChatPage = () => {
     });
 
     return () => {
-      console.log('Leaving room and disconnecting');
       socket.emit('leaveRoom', { pin });
       socket.disconnect();
     };
-  }, [pin]);
+  }, [pin, User]);
 
   const sendMessage = () => {
-    if (message.trim() !== '' && User && User.result && User.result.name) {
-      const socket = socketRef.current;
-      socket.emit('sendMessage', { pin, userId: User.result.name, message });
-      setMessage(''); // Clear the input field after sending
+    if (message.trim() && User?.result?.name) {
+      socketRef.current.emit('sendMessage', { pin, userId: User.result.name, message });
+      setMessage('');
     }
   };
 
@@ -83,9 +78,8 @@ const ChatPage = () => {
   };
 
   const handleLeave = () => {
-    const socket = socketRef.current;
-    socket.emit('leaveRoom', { pin });
-    socket.disconnect();
+    socketRef.current.emit('leaveRoom', { pin });
+    socketRef.current.disconnect();
     navigate('/ChatRoom');
   };
 
@@ -101,9 +95,7 @@ const ChatPage = () => {
           </div>
           <div className="chat-messages">
             {messages.map((msg, index) => (
-              <div key={index}>
-                <strong>{msg.userId}:</strong> {msg.message}
-              </div>
+              <div key={index}><strong>{msg.userId}:</strong> {msg.message}</div>
             ))}
           </div>
           <div className="button-container">
