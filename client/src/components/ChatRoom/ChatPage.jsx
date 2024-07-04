@@ -18,7 +18,7 @@ const ChatPage = () => {
   const User = useSelector((state) => state.currentUserReducer);
 
   useEffect(() => {
-    socketRef.current = io('wss://stack-overflow-wine-three.vercel.app', {
+    socketRef.current = io('https://stack-overflow-wine-three.vercel.app', {
       transports: ['websocket'],
       path: '/socket.io',
     });
