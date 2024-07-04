@@ -4,12 +4,12 @@ import ChatRoom from '../models/chatRoom.js';
 const socketMiddleware = (server) => {
   const io = new Server(server, {
     cors: {
-      origin: ["https://stack-overflow-client-seven.vercel.app"],
-      methods: ["GET", "POST", "PUT", "DELETE"],
+      origin: "https://stack-overflow-client-seven.vercel.app",
+      methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
+      allowedHeaders: ["Content-Type"],
       credentials: true,
-      allowedHeaders: ["Content-Type", "Authorization"],
     },
-    transports: ['websocket'], // Specify WebSocket as the only transport
+    path: '/socket.io',
   });
 
   io.on('connection', (socket) => {
