@@ -10,6 +10,7 @@ const socketMiddleware = (server) => {
       credentials: true,
     },
     path: '/socket.io',  // Ensure this matches the client configuration
+    transports: ['websocket'],
   });
 
   io.on('connection', (socket) => {
