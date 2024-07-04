@@ -19,14 +19,17 @@ const ChatPage = () => {
 
   useEffect(() => {
     socketRef.current = io('https://stack-overflow-wine-three.vercel.app', {
-    transports: ['websocket'],
-    path: '/socket.io',
+      transports: ['websocket'],
+      path: '/socket.io',
     });
     const socket = socketRef.current;
 
-    socket.connect();
+    console.log('Connecting to WebSocket server');
 
-    socket.emit('joinRoom', { pin });
+    socket.on('connect', () => {
+      console.log('Connected to WebSocket server');
+      socket.emit('joinRoom', { pin });
+    });
 
     socket.on('message', (msg) => {
       console.log('Received message:', msg);
@@ -46,7 +49,12 @@ const ChatPage = () => {
       console.error('Socket connection error:', err);
     });
 
+    socket.on('disconnect', () => {
+      console.log('Disconnected from WebSocket server');
+    });
+
     return () => {
+      console.log('Leaving room and disconnecting');
       socket.emit('leaveRoom', { pin });
       socket.disconnect();
     };
